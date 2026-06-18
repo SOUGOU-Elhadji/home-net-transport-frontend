@@ -105,25 +105,25 @@ export default function App() {
     setUser(null);
   };
 
-  const handleQuickDemoSession = (role: "SUPER_ADMIN" | "BUREAU" | "CHAUFFEUR") => {
-    // Generate an automatic demo profile for immediate playability
-    const demoProfile: User = {
-      id: "demo-id-123",
-      email: role === "SUPER_ADMIN" ? "admin@homenet.fr" : role === "BUREAU" ? "bureau@homenet.fr" : "chauffeur@homenet.fr",
-      firstName: role === "SUPER_ADMIN" ? "Jean-Marc" : role === "BUREAU" ? "Aurélie" : "David",
-      lastName: role === "SUPER_ADMIN" ? "Benoit" : role === "BUREAU" ? "Grange" : "Vignaud",
-      role: role,
-      licenseNumber: "PERMIS-9082-A",
-      licenseExpiry: "2029-12-31",
-      status: "ACTIVE",
-      createdAt: new Date().toISOString()
-    };
+  // const handleQuickDemoSession = (role: "SUPER_ADMIN" | "BUREAU" | "CHAUFFEUR") => {
+  //   // Generate an automatic demo profile for immediate playability
+  //   const demoProfile: User = {
+  //     id: "demo-id-123",
+  //     email: role === "SUPER_ADMIN" ? "admin@homenet.fr" : role === "BUREAU" ? "bureau@homenet.fr" : "chauffeur@homenet.fr",
+  //     firstName: role === "SUPER_ADMIN" ? "Jean-Marc" : role === "BUREAU" ? "Aurélie" : "David",
+  //     lastName: role === "SUPER_ADMIN" ? "Benoit" : role === "BUREAU" ? "Grange" : "Vignaud",
+  //     role: role,
+  //     licenseNumber: "PERMIS-9082-A",
+  //     licenseExpiry: "2029-12-31",
+  //     status: "ACTIVE",
+  //     createdAt: new Date().toISOString()
+  //   };
     
-    localStorage.setItem("token", "demo-mock-jwt-token");
-    localStorage.setItem("user", JSON.stringify(demoProfile));
-    setToken("demo-mock-jwt-token");
-    setUser(demoProfile);
-  };
+  //   localStorage.setItem("token", "demo-mock-jwt-token");
+  //   localStorage.setItem("user", JSON.stringify(demoProfile));
+  //   setToken("demo-mock-jwt-token");
+  //   setUser(demoProfile);
+  // };
 
   const handleMarkNotificationsRead = async () => {
     try {
@@ -190,7 +190,7 @@ export default function App() {
           </form>
 
           {/* Quick Sandbox Demo trigger panel */}
-          <div className="p-6 border-t border-slate-800 bg-slate-900/40 text-center space-y-3">
+          {/* <div className="p-6 border-t border-slate-800 bg-slate-900/40 text-center space-y-3">
             <p className="text-[11px] text-slate-500 font-bold uppercase tracking-wider">Console Sandbox – Accès rapide de démonstration</p>
             <div className="grid grid-cols-3 gap-2">
               <button 
@@ -212,7 +212,7 @@ export default function App() {
                 Chauffeur
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     );
