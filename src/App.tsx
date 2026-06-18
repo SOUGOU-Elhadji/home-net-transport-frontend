@@ -86,7 +86,7 @@ export default function App() {
     setLoginError(null);
     try {
       const res = await api.post("/api/auth/login", { email, password });
-      const { user: connectedUser, token: receivedToken } = res.data;
+      const { user: connectedUser, accessToken: receivedToken } = res.data;
       
       localStorage.setItem("token", receivedToken);
       localStorage.setItem("user", JSON.stringify(connectedUser));
