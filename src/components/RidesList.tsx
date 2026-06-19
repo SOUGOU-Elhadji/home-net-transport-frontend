@@ -35,27 +35,60 @@ export default function RidesList() {
     untilDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split("T")[0] // +30 days
   });
 
+  // const loadData = async () => {
+  //   try {
+  //     setLoading(true);
+  //     const [ridesRes, clientsRes, chauffeursRes, vehiclesRes, recRes] = await Promise.all([
+  //       api.get("/api/trajets"),
+  //       api.get("/api/clients"),
+  //       api.get("/api/chauffeurs"),
+  //       api.get("/api/vehicules"),
+  //       api.get("/api/trajets/recurring/list")
+  //     ]);
+  //     setRides(ridesRes.data);
+  //     setClients(clientsRes.data);
+  //     setChauffeurs(chauffeursRes.data);
+  //     setVehicles(vehiclesRes.data);
+  //     setRecurringList(recRes.data);
+  //   } catch (err) {
+  //     console.error("Error loading ride dashboard data:", err);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   const loadData = async () => {
-    try {
-      setLoading(true);
-      const [ridesRes, clientsRes, chauffeursRes, vehiclesRes, recRes] = await Promise.all([
-        api.get("/api/trajets"),
-        api.get("/api/clients"),
-        api.get("/api/chauffeurs"),
-        api.get("/api/vehicules"),
-        api.get("/api/trajets/recurring/list")
-      ]);
-      setRides(ridesRes.data);
-      setClients(clientsRes.data);
-      setChauffeurs(chauffeursRes.data);
-      setVehicles(vehiclesRes.data);
-      setRecurringList(recRes.data);
-    } catch (err) {
-      console.error("Error loading ride dashboard data:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  try {
+    setLoading(true);
+    
+    // allSettled permet de récupérer les données des requêtes qui réussissent même si certaines échouent
+    const results = await Promise.allSettled([
+      api.get("/api/trajets"),
+      api.get("/api/clients"),
+      api.get("/api/chauffeurs"),
+      api.get("/api/vehicules"),
+      api.get("/api/trajets/recurring/list")
+    ]);
+
+    if (results[0].status === "fulfilled") setRides(results[0].value.data);
+    if (results[1].status === "fulfilled") setClients(results[1].value.data);
+    if (results[2].status === "fulfilled") setChauffeurs(results[2].value.data);
+    if (results[3].status === "fulfilled") setVehicles(results[3].value.data);
+    if (results[4].status === "fulfilled") setRecurringList(results[4].value.data);
+
+    // Optionnel : afficher dans la console les requêtes qui échouent pour debug
+    results.forEach((res, index) => {
+      if (res.status === "rejected") {
+        console.error(`La requête index ${index} a échoué:`, res.reason);
+      }
+    });
+
+  } catch (err) {
+    console.error("Error loading ride dashboard data:", err);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   useEffect(() => {
     loadData();
