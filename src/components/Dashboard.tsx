@@ -112,7 +112,7 @@ export default function Dashboard({ stats: propStats, loading: propLoading }: Da
   const statCards = [
     {
       title: "Chiffre d'Affaires Mensuel",
-      value: `${s.monthlyRevenue.toLocaleString("fr-FR", { minimumFractionDigits: 2 })} €`,
+      value: `${s.monthlyRevenue.toLocaleString("fr-FR", { minimumFractionDigits: 0 })} Fcfa`,
       icon: DollarSign,
       color: "bg-emerald-50 text-emerald-600 border-emerald-100",
       description: "Chiffre d'affaires facturé ce mois-ci"
@@ -219,7 +219,7 @@ export default function Dashboard({ stats: propStats, loading: propLoading }: Da
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
                 <XAxis dataKey="month" stroke="#94a3b8" fontSize={11} tickLine={false} />
                 <YAxis stroke="#94a3b8" fontSize={11} tickLine={false} />
-                <Tooltip formatter={(value: any) => [`${value} €`, "Chiffre d'Affaires"]} />
+                <Tooltip formatter={(value: any) => [`${value} Fcfa`, "Chiffre d'Affaires"]} />
                 <Area type="monotone" dataKey="revenue" stroke="#10b981" strokeWidth={2.5} fillOpacity={1} fill="url(#colorRevenue)" />
               </AreaChart>
             </ResponsiveContainer>
