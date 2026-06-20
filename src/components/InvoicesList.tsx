@@ -153,15 +153,15 @@ export default function InvoicesList() {
             <tr>
               <td>Prestation d'accompagnement de transport sanitaire PMR</td>
               <td>${invoice.month || "Prestation unitaire"}</td>
-              <td style="text-align: right;">${(invoice.amount * 0.9).toFixed(2)} Fcfa</td>
-              <td style="text-align: right;">${(invoice.amount * 0.1).toFixed(2)} Fcfa</td>
-              <td style="text-align: right; font-weight: bold;">${invoice.amount.toFixed(2)} Fcfa</td>
+              <td style="text-align: right;">${(invoice.amount * 0.9).toFixed(0)} Fcfa</td>
+              <td style="text-align: right;">${(invoice.amount * 0.1).toFixed(0)} Fcfa</td>
+              <td style="text-align: right; font-weight: bold;">${invoice.amount.toFixed(0)} Fcfa</td>
             </tr>
           </tbody>
         </table>
 
         <div class="totals">
-          Montant Net à Payer : ${invoice.amount.toFixed(2)} Fcfa (TTC)
+          Montant Net à Payer : ${invoice.amount.toFixed(0)} Fcfa (TTC)
         </div>
 
         <div class="footer">
@@ -263,7 +263,7 @@ export default function InvoicesList() {
                       {inv.month && <div className="text-[10px] text-slate-400">{inv.month} (Mensuel)</div>}
                     </td>
                     <td className="px-4 py-3 text-sm text-right font-bold text-slate-950">
-                      {inv.amount.toFixed(2)} Fcfa
+                      {inv.amount.toFixed(0)} Fcfa
                     </td>
                     <td className="px-4 py-3 text-center">
                       <button
@@ -320,7 +320,7 @@ export default function InvoicesList() {
             <div>
               <span className="inline-flex px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[9px] font-bold">CA Encaissé</span>
               <h5 className="text-base font-extrabold text-emerald-700 mt-1">
-                {invoices.filter(i => i.status === "PAID").reduce((acc, current) => acc + current.amount, 0).toLocaleString("fr-FR", { minimumFractionDigits: 2 })} Fcfa
+                {invoices.filter(i => i.status === "PAID").reduce((acc, current) => acc + current.amount, 0).toLocaleString("fr-FR", { minimumFractionDigits: 0 })} Fcfa
               </h5>
             </div>
           </div>
@@ -329,7 +329,7 @@ export default function InvoicesList() {
             <div>
               <span className="inline-flex px-1.5 py-0.5 rounded bg-amber-150 text-amber-800 text-[9px] font-bold">CA En Retard / Attente</span>
               <h5 className="text-base font-extrabold text-amber-700 mt-1">
-                {invoices.filter(i => i.status !== "PAID").reduce((acc, current) => acc + current.amount, 0).toLocaleString("fr-FR", { minimumFractionDigits: 2 })} Fcfa
+                {invoices.filter(i => i.status !== "PAID").reduce((acc, current) => acc + current.amount, 0).toLocaleString("fr-FR", { minimumFractionDigits: 0 })} Fcfa
               </h5>
             </div>
             <DollarSign className="w-6 h-6 text-amber-600" />
