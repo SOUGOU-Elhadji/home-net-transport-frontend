@@ -52,7 +52,7 @@ export default function InvoicesList() {
   const handleClientSelect = (clientId: string) => {
     // If monthly billing, default amount can be computed from client completed rides
     const clientCompletedRides = rides.filter(r => r.clientId === clientId && r.status === "COMPLETED");
-    // Standard simulation: 35€ per completed ride
+    // Standard simulation: 35Fcfa per completed ride
     const computedSum = clientCompletedRides.length * 35;
     
     setFormData(prev => ({ 
@@ -153,15 +153,15 @@ export default function InvoicesList() {
             <tr>
               <td>Prestation d'accompagnement de transport sanitaire PMR</td>
               <td>${invoice.month || "Prestation unitaire"}</td>
-              <td style="text-align: right;">${(invoice.amount * 0.9).toFixed(2)} €</td>
-              <td style="text-align: right;">${(invoice.amount * 0.1).toFixed(2)} €</td>
-              <td style="text-align: right; font-weight: bold;">${invoice.amount.toFixed(2)} €</td>
+              <td style="text-align: right;">${(invoice.amount * 0.9).toFixed(2)} Fcfa</td>
+              <td style="text-align: right;">${(invoice.amount * 0.1).toFixed(2)} Fcfa</td>
+              <td style="text-align: right; font-weight: bold;">${invoice.amount.toFixed(2)} Fcfa</td>
             </tr>
           </tbody>
         </table>
 
         <div class="totals">
-          Montant Net à Payer : ${invoice.amount.toFixed(2)} € (TTC)
+          Montant Net à Payer : ${invoice.amount.toFixed(2)} Fcfa (TTC)
         </div>
 
         <div class="footer">
@@ -263,7 +263,7 @@ export default function InvoicesList() {
                       {inv.month && <div className="text-[10px] text-slate-400">{inv.month} (Mensuel)</div>}
                     </td>
                     <td className="px-4 py-3 text-sm text-right font-bold text-slate-950">
-                      {inv.amount.toFixed(2)} €
+                      {inv.amount.toFixed(2)} Fcfa
                     </td>
                     <td className="px-4 py-3 text-center">
                       <button
@@ -310,7 +310,7 @@ export default function InvoicesList() {
             <div>
               <p className="text-slate-400 font-semibold uppercase tracking-wide">CA Total Émis</p>
               <h5 className="text-lg font-extrabold text-slate-900 mt-1">
-                {invoices.reduce((acc, current) => acc + current.amount, 0).toLocaleString("fr-FR", { minimumFractionDigits: 2 })} €
+                {invoices.reduce((acc, current) => acc + current.amount, 0).toLocaleString("fr-FR", { minimumFractionDigits: 0 })} Fcfa
               </h5>
             </div>
             <FileText className="w-8 h-8 text-blue-500 opacity-60" />
@@ -320,7 +320,7 @@ export default function InvoicesList() {
             <div>
               <span className="inline-flex px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[9px] font-bold">CA Encaissé</span>
               <h5 className="text-base font-extrabold text-emerald-700 mt-1">
-                {invoices.filter(i => i.status === "PAID").reduce((acc, current) => acc + current.amount, 0).toLocaleString("fr-FR", { minimumFractionDigits: 2 })} €
+                {invoices.filter(i => i.status === "PAID").reduce((acc, current) => acc + current.amount, 0).toLocaleString("fr-FR", { minimumFractionDigits: 2 })} Fcfa
               </h5>
             </div>
           </div>
@@ -329,7 +329,7 @@ export default function InvoicesList() {
             <div>
               <span className="inline-flex px-1.5 py-0.5 rounded bg-amber-150 text-amber-800 text-[9px] font-bold">CA En Retard / Attente</span>
               <h5 className="text-base font-extrabold text-amber-700 mt-1">
-                {invoices.filter(i => i.status !== "PAID").reduce((acc, current) => acc + current.amount, 0).toLocaleString("fr-FR", { minimumFractionDigits: 2 })} €
+                {invoices.filter(i => i.status !== "PAID").reduce((acc, current) => acc + current.amount, 0).toLocaleString("fr-FR", { minimumFractionDigits: 2 })} Fcfa
               </h5>
             </div>
             <DollarSign className="w-6 h-6 text-amber-600" />
@@ -418,7 +418,7 @@ export default function InvoicesList() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-600 mb-1">Montant Arbitré (€ TTC) *</label>
+                  <label className="block text-xs font-semibold text-slate-600 mb-1">Montant Arbitré (Fcfa TTC) *</label>
                   <input 
                     type="number" 
                     step="0.01"
